@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import './pages/database.dart';
+import './pages/loginAndroid.dart' as Android;
+import './pages/loginIOS.dart' as IOS;
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,8 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 165, 165, 165)),
+              seedColor:
+                  const Color.fromARGB(255, 165, 165, 165)),
           useMaterial3: true,
         ),
         home: const MyHomePage(title: 'Flutter Demo Home Page'),
@@ -30,8 +33,10 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo on IOS',
         theme: CupertinoThemeData(
             primaryColor: Color.fromARGB(255, 0, 0, 0),
-            primaryContrastingColor: Color.fromARGB(255, 165, 165, 165)),
-        home: MyIosHomePage(title: 'Flutter Demo Home Page on IOS'),
+            primaryContrastingColor:
+                Color.fromARGB(255, 165, 165, 165)),
+        home: MyIosHomePage(
+            title: 'Flutter Demo Home Page on IOS'),
       );
     }
   }
@@ -59,11 +64,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _LoginPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => const Android.LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor:
+            Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
       body: Center(
@@ -84,18 +98,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ElevatedButton(
             onPressed: _decrementCounter,
             style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.amber)),
+                backgroundColor:
+                    MaterialStateProperty.all(Colors.amber)),
             child: const Icon(
               Icons.remove,
               color: Colors.black,
             )),
         ElevatedButton(
-            onPressed: _incrementCounter, child: const Icon(Icons.add)),
+            onPressed: _incrementCounter,
+            child: const Icon(Icons.add)),
         ElevatedButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const DatabasePage()),
+                MaterialPageRoute(
+                    builder: (context) => const DatabasePage()),
               );
             },
             child: const Text('Go to Database Page')),
@@ -126,6 +143,14 @@ class _MyIosHomePageState extends State<MyIosHomePage> {
     });
   }
 
+  void _LoginPage() {
+    Navigator.push(
+      context,
+      CupertinoPageRoute(
+          builder: (context) => const IOS.LoginPage()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -146,6 +171,29 @@ class _MyIosHomePageState extends State<MyIosHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            ButtonBar(
+              buttonPadding: EdgeInsets.zero,
+              alignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                  child: CupertinoButton.filled(
+                      onPressed: _LoginPage,
+                      child: const Row(children: <Widget>[
+                        Text('Login',
+                            style:
+                                TextStyle(color: Colors.white)),
+                        Padding(
+                            padding:
+                                EdgeInsets.fromLTRB(10, 0, 0, 0),
+                            child: Icon(
+                              CupertinoIcons.arrow_right_to_line,
+                              color: Colors.white,
+                            )),
+                      ])),
+                )
+              ],
+            ),
             Expanded(
                 child: Align(
                     alignment: FractionalOffset.bottomCenter,
@@ -156,26 +204,46 @@ class _MyIosHomePageState extends State<MyIosHomePage> {
                       child: Row(children: <Widget>[
                         Expanded(
                             child: Padding(
-                                padding: const EdgeInsets.all(20),
+                                padding:
+                                    const EdgeInsets.all(20),
                                 child: Align(
-                                    alignment: Alignment.bottomLeft,
+                                    alignment:
+                                        Alignment.bottomLeft,
                                     child: CupertinoButton(
-                                        padding: const EdgeInsets.all(10),
-                                        onPressed: _incrementCounter,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        child: const Text("Increment"))))),
+                                        padding:
+                                            const EdgeInsets.all(
+                                                10),
+                                        onPressed:
+                                            _incrementCounter,
+                                        color:
+                                            const Color.fromARGB(
+                                                255,
+                                                255,
+                                                255,
+                                                255),
+                                        child: const Text(
+                                            "Increment"))))),
                         Expanded(
                             child: Padding(
-                                padding: const EdgeInsets.all(20),
+                                padding:
+                                    const EdgeInsets.all(20),
                                 child: Align(
-                                    alignment: Alignment.bottomRight,
+                                    alignment:
+                                        Alignment.bottomRight,
                                     child: CupertinoButton(
-                                        padding: const EdgeInsets.all(10),
-                                        onPressed: _decrementCounter,
-                                        color: const Color.fromARGB(
-                                            255, 255, 255, 255),
-                                        child: const Text("Decrement")))))
+                                        padding:
+                                            const EdgeInsets.all(
+                                                10),
+                                        onPressed:
+                                            _decrementCounter,
+                                        color:
+                                            const Color.fromARGB(
+                                                255,
+                                                255,
+                                                255,
+                                                255),
+                                        child: const Text(
+                                            "Decrement")))))
                       ]),
                     )))
           ])),
